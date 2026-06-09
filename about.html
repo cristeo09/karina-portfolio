@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Karina</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000000'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='60' fill='%23FFFFFF' font-family='serif'>K</text></svg>">
+    
+    <!-- Google Fonts: Viaoda Libre, Pinyon Script, DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Pinyon+Script&family=Viaoda+Libre&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: 'DM Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: opacity 0.3s ease;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .menu-toggle .bar {
+            display: block;
+            width: 25px;
+            height: 2px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: #FFFFFF;
+        }
+
+        /* About Layout */
+        .about-container {
+            max-width: 1000px;
+            margin: 180px auto 6rem auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .about-image {
+            flex: 0 0 280px;
+        }
+
+        .about-image img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            display: block;
+        }
+
+        .about-bio {
+            flex: 1;
+        }
+
+        .about-bio p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto 6rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .testimonial blockquote {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3.5rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial cite {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-style: normal;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up-load {
+            animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    /* Scroll to Top Button */
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 45px;
+        height: 45px;
+        background-color: #FFFFFF;
+        color: #000000;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .scroll-top-btn.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .scroll-top-btn:hover {
+        background-color: #e6e6e6;
+        transform: translateY(-3px);
+    }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: 100%;
+                width: 100%;
+                height: 100vh;
+                background-color: #000000;
+                flex-direction: column;
+                align-items: center;
+                transition: left 0.4s ease;
+                z-index: 99;
+                margin: 0;
+                padding: 0;
+            }
+            nav ul.active {
+                left: 0;
+            }
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+            nav ul a {
+                font-size: 1.5rem;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .menu-toggle.is-active {
+                position: fixed;
+            }
+            .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+            .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+            .about-container { flex-direction: column; text-align: center; gap: 3rem; margin-top: 140px; }
+            .testimonial blockquote { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main About Section -->
+    <main class="about-container fade-up-load">
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" alt="Karina - Wedding Photographer">
+        </div>
+        <div class="about-bio">
+            <p>I’m Karina, a wedding and portrait photographer with a profound love for genuine human connection. For over a decade, I have been documenting love stories across the globe, translating fleeting emotions into timeless, monochromatic art. My approach is rooted in photojournalism—stepping back to let your day unfold naturally, while quietly capturing the honest, unscripted moments that matter most.</p>
+            <p>I believe that the most beautiful images are born from authenticity. Rather than relying on stiff poses, I focus on the quiet glances, the erupting laughter, and the raw vulnerability of two people committing their lives to one another. When I don't have a camera in hand, you can find me exploring vintage film archives or chasing the golden hour light in my hometown.</p>
+        </div>
+    </main>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial fade-in-section">
+        <blockquote>"Karina didn't just take photos; she captured the very soul of our wedding day. Looking at her work is like reliving the magic all over again."</blockquote>
+        <cite>— Eleanor & James</cite>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">&#8593;</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Scroll to Top Logic
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Mobile Menu Logic
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            mobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('is-active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+        });
+    </script>
+</body>
+</html>
